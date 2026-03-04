@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sharan Patil — Portfolio</title>
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none';">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream:    #f5f0e8;
+      --parchment:#ede6d6;
+      --warm:     #e8dcc8;
+      --espresso: #2c1f14;
+      --brown:    #4a3728;
+      --rust:     #c4622d;
+      --terracotta:#d4845a;
+      --sage:     #7a8c6e;
+      --muted:    #8c7b6b;
+      --ink:      #3d2e22;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 5rem;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(74,55,40,0.12);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--espresso);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--rust); }
+
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 8rem 5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .hero-inner { max-width: 780px; position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .eyebrow-line { width: 36px; height: 1px; background: var(--rust); }
+    .eyebrow-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+    .hero-story { opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards; }
+    .story-opener {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      font-style: italic;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+      max-width: 560px;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--espresso);
+      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+    .hero-name em { font-style: italic; color: var(--rust); }
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--brown);
+      line-height: 1.75;
+      margin: 1.5rem 0 2.5rem;
+      max-width: 520px;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.9s ease 0.8s forwards; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+    .btn-primary { background: var(--espresso); color: var(--cream); }
+    .btn-primary:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(196,98,45,0.3); }
+    .btn-ghost { background: transparent; color: var(--brown); border: 1px solid rgba(74,55,40,0.3); }
+    .btn-ghost:hover { border-color: var(--rust); color: var(--rust); transform: translateY(-2px); }
+
+    .hero-scroll-hint {
+      position: absolute; bottom: 2.5rem; left: 5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+      opacity: 0; animation: fadeUp 1s ease 1.2s forwards;
+    }
+    .scroll-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, transparent, var(--muted));
+      animation: scrollpulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollpulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+    .scroll-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+    }
+
+    section { padding: 7rem 5rem; }
+    .section-label { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+    .section-label-line { width: 28px; height: 1px; background: var(--rust); }
+    .section-label-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--espresso);
+      line-height: 1.15;
+    }
+    h2 em { font-style: italic; color: var(--rust); }
+
+    #about { background: var(--parchment); border-top: 1px solid rgba(74,55,40,0.1); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+    .about-text p { font-size: 0.98rem; line-height: 1.9; color: var(--brown); margin-bottom: 1.2rem; }
+    .about-text p strong { color: var(--espresso); }
+    .about-text p em { font-style: italic; color: var(--rust); }
+    .about-pull-quote {
+      border-left: 3px solid var(--rust);
+      padding: 1.2rem 1.8rem;
+      margin: 2rem 0;
+      background: rgba(196,98,45,0.05);
+    }
+    .about-pull-quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--espresso);
+      line-height: 1.65;
+    }
+    .aside-card {
+      background: var(--cream);
+      border: 1px solid rgba(74,55,40,0.12);
+      border-radius: 3px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .aside-card-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .aside-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(74,55,40,0.08);
+    }
+    .aside-row:last-child { border-bottom: none; }
+    .aside-row span:first-child { color: var(--muted); font-size: 0.78rem; }
+    .aside-row span:last-child { font-weight: 500; color: var(--espresso); }
+
+    #skills { border-top: 1px solid rgba(74,55,40,0.1); }
+    .skills-intro { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 520px; margin: 1rem 0 3rem; }
+    .skills-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.2rem; }
+    .skill-item {
+      padding: 1.5rem 1.8rem;
+      background: var(--parchment);
+      border: 1px solid rgba(74,55,40,0.1);
+      border-radius: 3px;
+      transition: all 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .skill-item::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      height: 2px; width: 0;
+      background: var(--rust);
+      transition: width 0.3s ease;
+    }
+    .skill-item:hover::after { width: 100%; }
+    .skill-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(44,31,20,0.08); }
+    .skill-emoji { font-size: 1.5rem; margin-bottom: 0.7rem; }
+    .skill-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--espresso); margin-bottom: 0.3rem; }
+    .skill-note { font-size: 0.75rem; color: var(--muted); font-style: italic; line-height: 1.5; }
+
+    #projects { background: var(--warm); border-top: 1px solid rgba(74,55,40,0.1); }
+    .projects-intro { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 500px; margin: 1rem 0 3.5rem; }
+    .project-entry {
+      display: grid; grid-template-columns: 64px 1fr; gap: 0 3rem;
+      padding: 3rem 0;
+      border-bottom: 1px solid rgba(74,55,40,0.12);
+    }
+    .project-entry:last-child { border-bottom: none; }
+    .project-num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 3.5rem; font-weight: 400;
+      color: rgba(74,55,40,0.14);
+      line-height: 1;
+      transition: color 0.25s;
+    }
+    .project-entry:hover .project-num { color: rgba(196,98,45,0.3); }
+    .project-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem; }
+    .project-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--espresso); }
+    .project-lang-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--rust);
+      background: rgba(196,98,45,0.1);
+      border: 1px solid rgba(196,98,45,0.25);
+      padding: 0.25rem 0.7rem; border-radius: 2px;
+    }
+    .project-desc { font-size: 0.92rem; color: var(--brown); line-height: 1.8; margin-bottom: 1.2rem; max-width: 580px; }
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.08em;
+      color: var(--sage); border: 1px solid rgba(122,140,110,0.3);
+      padding: 0.2rem 0.6rem; border-radius: 2px;
+    }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--rust); text-decoration: none;
+      border-bottom: 1px solid rgba(196,98,45,0.35);
+      padding-bottom: 0.1rem;
+      transition: all 0.2s;
+    }
+    .project-link:hover { gap: 0.7rem; border-color: var(--rust); }
+
+    #human { border-top: 1px solid rgba(74,55,40,0.1); }
+    .human-intro { font-size: 0.95rem; color: var(--muted); line-height: 1.8; max-width: 520px; margin: 1rem 0 3.5rem; }
+    .human-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+    .human-card {
+      background: var(--parchment);
+      border: 1px solid rgba(74,55,40,0.1);
+      border-radius: 3px; padding: 2rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .human-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(44,31,20,0.1); }
+    .human-card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .human-card-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; color: var(--espresso); margin-bottom: 0.6rem; }
+    .human-card-text { font-size: 0.83rem; color: var(--muted); line-height: 1.7; }
+    .human-card-text strong { color: var(--brown); }
+
+    #education { background: var(--parchment); border-top: 1px solid rgba(74,55,40,0.1); }
+    .edu-entry { display: flex; gap: 2rem; align-items: flex-start; max-width: 640px; margin-top: 2.5rem; }
+    .edu-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--rust); margin-top: 0.4rem; flex-shrink: 0; box-shadow: 0 0 0 4px rgba(196,98,45,0.15); }
+    .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--espresso); margin-bottom: 0.3rem; }
+    .edu-college { font-size: 0.88rem; color: var(--brown); margin-bottom: 0.3rem; }
+    .edu-year { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); }
+
+    #contact { border-top: 1px solid rgba(74,55,40,0.1); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+    .contact-blurb { font-size: 0.95rem; color: var(--brown); line-height: 1.9; margin-bottom: 2rem; }
+    .contact-blurb em { font-style: italic; color: var(--rust); }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.1rem 1.5rem;
+      background: var(--parchment); border: 1px solid rgba(74,55,40,0.12);
+      border-radius: 3px; text-decoration: none; color: var(--brown);
+      font-size: 0.85rem; transition: all 0.25s;
+    }
+    .contact-link:hover { border-color: var(--rust); color: var(--rust); transform: translateX(4px); }
+    .contact-link-icon { font-size: 1.1rem; }
+    .contact-link-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-left: auto; }
+    .contact-quote-block { padding: 2.5rem; background: var(--espresso); border-radius: 3px; }
+    .cqb-top { font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terracotta); margin-bottom: 1.5rem; }
+    .cqb-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.25rem; line-height: 1.65; color: var(--cream); margin-bottom: 1.5rem; }
+    .cqb-attr { font-size: 0.78rem; color: rgba(245,240,232,0.45); }
+
+    footer {
+      padding: 2rem 5rem;
+      border-top: 1px solid rgba(74,55,40,0.12);
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--warm);
+    }
+    .footer-text { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--muted); }
+    .footer-text span { color: var(--rust); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      #hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .project-entry { grid-template-columns: 1fr; }
+      .project-num { font-size: 2rem; }
+      .hero-scroll-hint { left: 1.5rem; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sharan Patil</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#human">Human</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-text">BTech CSE · Kalaburagi, India · 2025</span>
+    </div>
+    <div class="hero-story">
+      <p class="story-opener">
+        I was twelve when I first asked, <em>"how does a calculator know what 2 + 2 is?"</em>
+        Nobody gave me a satisfying answer. So I decided to find out for myself.
+      </p>
+      <h1 class="hero-name">Sharan <em>Patil.</em></h1>
+      <p style="font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;color:var(--muted);line-height:1.8;margin-bottom:0.5rem;text-transform:uppercase;">
+        First-Year BTech CSE Student<br>Exploring Systems, Algorithms, and Curiosity
+      </p>
+      <p class="hero-tagline">
+        A first-year CS student who believes every bug is just an unanswered question,
+        and every program is a chance to think more clearly.
+      </p>
+    </div>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">Read my work →</a>
+      <a href="https://github.com/sharanpatil165" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">⎇ GitHub</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label reveal">
+    <div class="section-label-line"></div>
+    <span class="section-label-text">About me</span>
+  </div>
+  <h2 class="reveal reveal-delay-1">A student, a builder,<br>a <em>curious mind.</em></h2>
+  <div class="about-grid">
+    <div class="about-text reveal reveal-delay-1">
+      <p>My name is <strong>Sharanabasappa Patil</strong> — but everyone calls me <strong>Sharan</strong> (or Ash, if you've known me long enough). I'm a first-year BTech Computer Science student at <em>Poojya Doddappa Appa College of Engineering</em>, Kalaburagi.</p>
+      <p>I came into CS not because it was a "safe career choice," but because I couldn't stop wondering how things work. I started with C — raw, close to the metal — and I loved how it made me think about <strong>every byte and every loop</strong>.</p>
+      <div class="about-pull-quote">
+        <blockquote>"The best programs aren't just correct — they tell you something about the person who wrote them."</blockquote>
+      </div>
+      <p>Right now I'm deep in the fundamentals: algorithms, pointers, recursion, and building small things that actually run. I've got a long way to go, and honestly, that's the most exciting part.</p>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="aside-card">
+        <div class="aside-card-title">Quick Facts</div>
+        <div class="aside-row"><span>Degree</span><span>BTech CSE</span></div>
+        <div class="aside-row"><span>College</span><span>PDACOEK, Kalaburagi</span></div>
+        <div class="aside-row"><span>Year</span><span>1st Year (2025–2029)</span></div>
+        <div class="aside-row"><span>Languages</span><span>C & Python</span></div>
+        <div class="aside-row"><span>Status</span><span>Learning every day</span></div>
+      </div>
+      <div class="aside-card">
+        <div class="aside-card-title">Currently</div>
+        <div class="aside-row"><span>Reading</span><span>K&R — The C Book</span></div>
+        <div class="aside-row"><span>Watching</span><span>Re:Zero S3</span></div>
+        <div class="aside-row"><span>Learning</span><span>Pointers & Memory</span></div>
+        <div class="aside-row"><span>Following</span><span>Virat Kohli 🏏</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label reveal"><div class="section-label-line"></div><span class="section-label-text">Skills</span></div>
+  <h2 class="reveal reveal-delay-1">Tools I reach for<br><em>when solving problems.</em></h2>
+  <p class="skills-intro reveal reveal-delay-1">Not a long list — but everything here is something I've actually used and understood, not just listed to fill space.</p>
+  <div class="skills-list">
+    <div class="skill-item reveal reveal-delay-1"><div class="skill-emoji">⚡</div><div class="skill-name">C Programming</div><div class="skill-note">My first language. Close to the metal, close to my heart.</div></div>
+    <div class="skill-item reveal reveal-delay-2"><div class="skill-emoji">🐍</div><div class="skill-name">Python</div><div class="skill-note">Picking it up fast. Clean syntax, powerful ideas.</div></div>
+    <div class="skill-item reveal reveal-delay-3"><div class="skill-emoji">🧮</div><div class="skill-name">Algorithms & DSA</div><div class="skill-note">Sorting, searching, recursion — the fun fundamentals.</div></div>
+    <div class="skill-item reveal reveal-delay-1"><div class="skill-emoji">🖥️</div><div class="skill-name">Linux & CLI</div><div class="skill-note">Comfortable working in the terminal and using basic Linux commands.</div></div>
+    <div class="skill-item reveal reveal-delay-2"><div class="skill-emoji">🌱</div><div class="skill-name">Git & GitHub</div><div class="skill-note">Using Git and GitHub for version control while building projects.</div></div>
+    <div class="skill-item reveal reveal-delay-3"><div class="skill-emoji">🔍</div><div class="skill-name">Problem Solving</div><div class="skill-note">The skill underneath all the other skills.</div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label reveal"><div class="section-label-line"></div><span class="section-label-text">Projects</span></div>
+  <h2 class="reveal reveal-delay-1">Things I built<br><em>because I was curious.</em></h2>
+  <p class="projects-intro reveal reveal-delay-1">Every project started with a question. Here's what happened when I tried to answer them.</p>
+
+  <div class="project-entry reveal">
+    <div class="project-num">01</div>
+    <div>
+      <div class="project-top">
+        <div class="project-title">Mini Shell</div>
+        <span class="project-lang-badge">C</span>
+      </div>
+      <p class="project-desc">I wanted to understand what happens between typing a command and seeing a result. So I built my own shell. It handles a continuous input loop, parses commands, runs clear, shows my social links, and exits gracefully. Small thing — but writing it made me feel like I actually understood what a terminal <em>is</em>.</p>
+      <div class="project-tags">
+        <span class="tag">Systems Programming</span>
+        <span class="tag">CLI</span>
+        <span class="tag">Command Parser</span>
+        <span class="tag">stdio.h</span>
+      </div>
+      <a href="https://github.com/sharanpatil165/mini-shell" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+
+  <div class="project-entry reveal">
+    <div class="project-num">02</div>
+    <div>
+      <div class="project-top">
+        <div class="project-title">C Practice Programs</div>
+        <span class="project-lang-badge">C</span>
+      </div>
+      <p class="project-desc">A growing collection of programs I wrote while learning — factorial, prime checking, binary search, matrix operations, and string reversal. Not flashy, but every single one taught me something. This is where the fundamentals live.</p>
+      <div class="project-tags">
+        <span class="tag">Binary Search</span>
+        <span class="tag">Recursion</span>
+        <span class="tag">Matrix Ops</span>
+        <span class="tag">String Manipulation</span>
+      </div>
+      <a href="https://github.com/sharanpatil165/C-PRACTICE" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<section id="human">
+  <div class="section-label reveal"><div class="section-label-line"></div><span class="section-label-text">The human behind the screen</span></div>
+  <h2 class="reveal reveal-delay-1">I contain<br><em>multitudes.</em></h2>
+  <p class="human-intro reveal reveal-delay-1">I'm more than a GitHub profile. Here's who I am when the laptop is closed.</p>
+  <div class="human-grid">
+    <div class="human-card reveal reveal-delay-1">
+      <div class="human-card-icon">⚔️</div>
+      <div class="human-card-title">Anime Enthusiast</div>
+      <div class="human-card-text">I will passionately defend <strong>Subaru Natsuki</strong> in any argument. Currently following Re:Zero, Blue Lock, Bleach, and rewatching Naruto for the emotional damage.</div>
+    </div>
+    <div class="human-card reveal reveal-delay-2">
+      <div class="human-card-icon">🏏</div>
+      <div class="human-card-title">Cricket Follower</div>
+      <div class="human-card-text"><strong>Virat Kohli</strong> is simply different. There's no debate. I watch every match and feel things no programmer should feel about a sport.</div>
+    </div>
+    <div class="human-card reveal reveal-delay-3">
+      <div class="human-card-icon">🌌</div>
+      <div class="human-card-title">Curious About Everything</div>
+      <div class="human-card-text">Astrology, how black holes work, why some code feels <em>elegant</em> — I'm the person who goes down Wikipedia rabbit holes at midnight and has zero regrets.</div>
+    </div>
+    <div class="human-card reveal reveal-delay-1">
+      <div class="human-card-icon">🐛</div>
+      <div class="human-card-title">Professional Bug Introducer</div>
+      <div class="human-card-text">I write a feature. I introduce three bugs fixing it. I fix those, and somehow it works. Allegedly this is <strong>normal</strong>. I'm choosing to believe that.</div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-label reveal"><div class="section-label-line"></div><span class="section-label-text">Education</span></div>
+  <h2 class="reveal reveal-delay-1">Where the <em>journey</em><br>formally began.</h2>
+  <div class="edu-entry reveal reveal-delay-2">
+    <div class="edu-dot"></div>
+    <div>
+      <div class="edu-degree">BTech Computer Science & Engineering</div>
+      <div class="edu-college">Poojya Doddappa Appa College of Engineering — Kalaburagi, Karnataka</div>
+      <div class="edu-year">AUG 2025 — 2029</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label reveal"><div class="section-label-line"></div><span class="section-label-text">Contact</span></div>
+  <h2 class="reveal reveal-delay-1">Let's have a<br><em>real conversation.</em></h2>
+  <div class="contact-grid">
+    <div class="reveal reveal-delay-1">
+      <p class="contact-blurb">Whether it's about code, anime theories, cricket takes, or just <em>anything interesting</em> — I'm genuinely happy to hear from you. I don't do formal. Let's just talk.</p>
+      <div class="contact-links">
+        <a href="https://github.com/sharanpatil165" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-icon">🐙</span> GitHub — sharanpatil165
+          <span class="contact-link-label">Code</span>
+        </a>
+        <a href="https://www.linkedin.com/in/sharanabasappa-patil-a549bb385" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-icon">💼</span> LinkedIn — Sharanabasappa Patil
+          <span class="contact-link-label">Professional</span>
+        </a>
+        <a href="https://www.instagram.com/sharan_patil65" target="_blank" rel="noopener noreferrer" class="contact-link">
+          <span class="contact-link-icon">📸</span> Instagram — @sharan_patil65
+          <span class="contact-link-label">Social</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-quote-block reveal reveal-delay-2">
+      <div class="cqb-top">// a thought to leave you with</div>
+      <div class="cqb-quote">"I'm not the finished product. I'm the rough draft — and I think that's actually the most interesting version."</div>
+      <div class="cqb-attr">— on being a work in progress</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-text">Crafted with curiosity by <span>Sharan Patil</span> · 2025</div>
+  <div class="footer-text">Kalaburagi, Karnataka · <span>BTech CSE</span></div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {});
+
+  // Cursor particle trail
+  const colors = ['#c4622d', '#d4845a', '#7a8c6e', '#4a3728', '#e8dcc8'];
+  let lastX = 0, lastY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    const speed = Math.sqrt(dx * dx + dy * dy);
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    // Only spawn particles when moving fast enough
+    if (speed < 3) return;
+
+    const count = Math.min(Math.floor(speed / 6), 4);
+    for (let i = 0; i < count; i++) {
+      spawnParticle(e.clientX, e.clientY);
+    }
+  });
+
+  function spawnParticle(x, y) {
+    const p = document.createElement('div');
+    const size = Math.random() * 7 + 4;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const angle = Math.random() * Math.PI * 2;
+    const spread = Math.random() * 28 + 8;
+    const tx = Math.cos(angle) * spread;
+    const ty = Math.sin(angle) * spread;
+    const duration = Math.random() * 500 + 400;
+
+    p.style.cssText = `
+      position: fixed;
+      left: ${x}px;
+      top: ${y}px;
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: 50%;
+      background: ${color};
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      opacity: 0.75;
+      transition: transform ${duration}ms ease-out, opacity ${duration}ms ease-out;
+    `;
+
+    document.body.appendChild(p);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        p.style.transform = `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(0.1)`;
+        p.style.opacity = '0';
+      });
+    });
+
+    setTimeout(() => p.remove(), duration + 50);
+  }
+</script>
+</body>
+</html>

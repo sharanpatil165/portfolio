@@ -1,21 +1,40 @@
-# Personal Portfolio
+# Hey, I'm Sharan 👋
 
-My personal portfolio website.
+First-year CSE student in Kalaburagi who likes building things that work on
+real hardware and real screens. Friends call me Ash.
 
- ## 🌐 Live Website
-[Visit Portfolio](https://portfolio-nine-sandy-sgmt026oa3.vercel.app)
+---
 
-## Tech Used
-- HTML
-- CSS
-- Git
-- Vercel deployment
+## What I'm up to
 
-## Features
-- Responsive design
-- Smooth scrolling sections
-- Deployed with CI/CD using GitHub and Vercel
+- 🎓 BTech CSE at **PDACEK**, Kalaburagi
+- 🛠️ Technical Lead at the campus **Idea Lab** (team of 6)
+- 🎨 Rebuilding my portfolio until it finally feels right (version count: too many)
 
-## Author
-Sharan Patil
-B.Tech CSE student learning programming, Git, and system fundamentals.
+---
+
+## Personal projects
+
+| Project | What it is |
+|---|---|
+| [**Campus Navigator**](https://pda-campus-website.vercel.app) | A searchable campus guide for PDACEK: departments, faculty, facilities, a clickable map, and a keyword chatbot. Vanilla JS + Bootstrap 5. |
+| **TaskMind** | _one line on what it does_ |
+| **Full-Page Shot** | _one line on what it does_ |
+
+Portfolio: [sharanpatil.vercel.app](https://sharanpatil.vercel.app)
+
+---
+
+## Tools I use
+
+**Languages:** C · Python · JavaScript · TypeScript
+**Web:** React · FastAPI · Bootstrap 5
+**Embedded:** ESP32 · Arduino IDE
+**Workflow:** Cursor · Git/GitHub · Vercel · DaVinci Resolve
+
+---
+
+## Find me
+
+- 🌐 [sharanpatil.vercel.app](https://sharanpatil.vercel.app)
+- 💻 [github.com/sharanpatil165](https://github.com/sharanpatil165)

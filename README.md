@@ -11,18 +11,7 @@ real hardware and real screens.
 - 🎨 Rebuilding my portfolio until it finally feels right (version count: too many)
 - 👾 currently in 3rd SEM!
 ---
-
-## Personal projects
-
-| Project | What it is |
-|---|---|
-| [**Campus Navigator**](https://pda-campus-website.vercel.app) | A searchable campus guide for PDACEK: departments, faculty, facilities, a clickable map, and a keyword chatbot. Vanilla JS + Bootstrap 5. |
-| **TaskMind** | _one line on what it does_ |
-| **Full-Page Shot** | _one line on what it does_ |
-
-Portfolio: [sharanpatil.vercel.app](https://sharanpatil.vercel.app)
-
----
+ 
 
 ## Tools I use
 

@@ -1,16 +1,15 @@
 # Hey, I'm Sharan 👋
 
 First-year CSE student in Kalaburagi who likes building things that work on
-real hardware and real screens. Friends call me Ash.
+real hardware and real screens.  
 
 ---
 
 ## What I'm up to
 
 - 🎓 BTech CSE at **PDACEK**, Kalaburagi
-- 🛠️ Technical Lead at the campus **Idea Lab** (team of 6)
 - 🎨 Rebuilding my portfolio until it finally feels right (version count: too many)
-
+- 👾 currently in 3rd SEM!
 ---
 
 ## Personal projects
